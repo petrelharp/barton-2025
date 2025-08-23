@@ -1,0 +1,16 @@
+\documentclass{article}
+\usepackage{fullpage}
+\usepackage[style=numeric, sorting=ydnt, backend=biber]{biblatex}
+\addbibresource{barton.bib}
+\AtEveryBibitem{\clearfield{eprint}}
+\AtEveryCitekey{\clearfield{eprint}}
+\AtEveryBibitem{\clearfield{doi}}
+\AtEveryCitekey{\clearfield{doi}}
+\AtEveryBibitem{\clearfield{url}}
+\AtEveryCitekey{\clearfield{url}}
+\AtEveryBibitem{\clearfield{issn}}
+\AtEveryCitekey{\clearfield{issn}}
+\begin{document}
+\nocite{*}
+\printbibliography
+\end{document}

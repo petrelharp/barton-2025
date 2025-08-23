@@ -1,0 +1,90 @@
+<style type="text/css">
+
+@font-face {
+  font-family: 'RobotoCondensed';
+  src: url('fonts/RobotoCondensed-Regular.woff') format('woff')
+}
+
+@font-face {
+  font-family: 'RobotoCondensed-Light';
+  src: url('fonts/RobotoCondensed-Light.woff') format('woff')
+  font-weight: light;
+}
+
+@font-face {
+  font-family: 'RobotoCondensed';
+  src: url('fonts/RobotoCondensed-Bold.woff') format('woff')
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'RobotoCondensed';
+  src: url('fonts/RobotoCondensed-Italic.woff') format('woff')
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'RobotoCondensed';
+  src: url('fonts/RobotoCondensed-BoldItalic.woff') format('woff')
+  font-weight: bold;
+  font-style: italic;
+}
+
+
+.reveal {
+    font-size: 24px; 
+    font-family: RobotoCondensed;
+}
+
+.reveal h1 { font-size: 1.5em; } 
+
+.reveal h2 { font-size: 1.2em; } 
+
+.reveal .slides { text-align: left; }
+
+.reveal .slides figure { text-align: center; }
+
+.centered p { text-align: center; }
+img.centered { margin-left: auto; margin-right: auto; display: block; }
+
+/* apply this to the columns div */
+div.vcentered { display: flex; align-items: center; }
+
+div.bottomright { position: fixed; bottom: 0; right: 0; }
+
+.caption p { font-size: 75%; font-style: italic; color: #0006; clear: both; }
+
+.greyed { color: #0004; }
+
+img.floatright, div.floatright { float: right; text-align: right; }
+img.floatleft, div.floatleft { float: left; text-align: left; }
+
+img.centered { margin-left: auto; margin-right: auto; display: block; }
+
+.invisible { opacity: 0; }
+
+.reveal figcaption { display: none; }
+
+.reveal img { border: none; }
+
+.reveal section img { border: none; }
+
+.MathJax_Display { margin: 0; }
+
+img.finger { vertical-align: text-top; }
+
+.smaller { font-size: 50%; }
+.smallish { font-size: 80%; }
+
+.hide { opacity: 0; }
+
+.red { color: red; }
+.blue { color: blue; }
+
+.coverup { background: white; }
+
+div.column { overflow: visible; }
+
+</style>
+
+
