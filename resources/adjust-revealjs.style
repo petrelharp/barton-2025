@@ -78,8 +78,9 @@ img.finger { vertical-align: text-top; }
 
 .hide { opacity: 0; }
 
-.red { color: red; }
-.blue { color: blue; }
+.red { color: #bc6f9a; }
+.blue { color: #356e8e; }
+.yellow { color: #a79f2d; }
 
 .coverup { background: white; }
 
