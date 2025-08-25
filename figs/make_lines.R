@@ -111,7 +111,7 @@ png(file="lines_successful_all.png", width=1500, height=1000, pointsize=10)
 dev.off()
 
 # lineage
-png(file="lines_lienage.png", width=1500, height=1000, pointsize=10)
+png(file="lines_lineage.png", width=1500, height=1000, pointsize=10)
     plot_setup(xy, pc)
     lines(trace_up(1, floor(n[1]/2), pc), col='red', lwd=2)
 dev.off()

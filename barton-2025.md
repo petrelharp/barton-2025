@@ -183,7 +183,7 @@ The density of *successful* lines of descent
 ::: fragment
 from location $x$ at time $s$ to location $y$ at time $t$
 is $h_{s,t}(x,y)$, where
-$$\int h_{s,t}(x,y) f(y) dy = \mathbb{E}_x[f(Y_t) e^{-\int_s^t b(Y_u) du}],$$
+$$\int h_{s,t}(x,y) f(y) dy = \mathbb{E}_x[f(Y_t) e^{\int_s^t b(Y_u) du}],$$
 :::
 
 ::: fragment
@@ -241,7 +241,7 @@ $$ dL_t = r(L_t) \gamma(L_t) 2 \nabla \log(\varphi\gamma)(L_t) dt
 - and drawn to regions of high total fecundity
     (<span class="red">$\varphi \gamma$</span>).
 - Reversible with respect to
-$$\color{red}{\pi(x) = \frac{\gamma(x,\varphi(x)) w(x)^2 }{ r(x,w(x))}.} $$
+$$\color{red}{\pi(x) = \frac{\gamma(x,\varphi(x)) \varphi(x)^2 }{ r(x,\varphi(x))}.} $$
 :::
 
 ::::::
