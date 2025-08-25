@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Peter Ralph   University of Oregon   Dept of Data Science">
+  <title>Mathematical insights and difficulties in spatial population genetics</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="./reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="./reveal.js/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="./reveal.js/dist/theme/simple.css" id="theme">
+  <style type="text/css">
+
+  @font-face {
+    font-family: 'RobotoCondensed';
+    src: url('fonts/RobotoCondensed-Regular.woff') format('woff')
+  }
+
+  @font-face {
+    font-family: 'RobotoCondensed-Light';
+    src: url('fonts/RobotoCondensed-Light.woff') format('woff')
+    font-weight: light;
+  }
+
+  @font-face {
+    font-family: 'RobotoCondensed';
+    src: url('fonts/RobotoCondensed-Bold.woff') format('woff')
+    font-weight: bold;
+  }
+
+  @font-face {
+    font-family: 'RobotoCondensed';
+    src: url('fonts/RobotoCondensed-Italic.woff') format('woff')
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: 'RobotoCondensed';
+    src: url('fonts/RobotoCondensed-BoldItalic.woff') format('woff')
+    font-weight: bold;
+    font-style: italic;
+  }
+
+
+  .reveal {
+      font-size: 24px; 
+      font-family: RobotoCondensed;
+  }
+
+  .reveal h1 { font-size: 1.5em; } 
+
+  .reveal h2 { font-size: 1.2em; } 
+
+  .reveal .slides { text-align: left; }
+
+  .reveal .slides figure { text-align: center; }
+
+  .centered p { text-align: center; }
+  img.centered { margin-left: auto; margin-right: auto; display: block; }
+
+  /* apply this to the columns div */
+  div.vcentered { display: flex; align-items: center; }
+
+  div.bottomright { position: fixed; bottom: 0; right: 0; }
+
+  .caption p { font-size: 75%; font-style: italic; color: #0006; clear: both; }
+
+  .greyed { color: #0004; }
+
+  img.floatright, div.floatright { float: right; text-align: right; }
+  img.floatleft, div.floatleft { float: left; text-align: left; }
+
+  img.centered { margin-left: auto; margin-right: auto; display: block; }
+
+  .invisible { opacity: 0; }
+
+  .reveal figcaption { display: none; }
+
+  .reveal img { border: none; }
+
+  .reveal section img { border: none; }
+
+  .MathJax_Display { margin: 0; }
+
+  img.finger { vertical-align: text-top; }
+
+  .smaller { font-size: 50%; }
+  .smallish { font-size: 80%; }
+
+  .hide { opacity: 0; }
+
+  .red { color: #bc6f9a; }
+  .blue { color: #356e8e; }
+  .yellow { color: #a79f2d; }
+
+  .coverup { background: white; }
+
+  div.column { overflow: visible; }
+
+  </style>
+
+  <div style="display: none">
+  \[
+  \usepackage{amsmath}
+  \usepackage{amssymb}
+  \usepackage{xcolor}
+
+  \newcommand{\R}{\mathbb{R}}
+  \newcommand{\Q}{\mathbb{Q}}
+  \newcommand{\Z}{\mathbb{Z}}
+  \newcommand{\N}{\mathbb{N}}
+  \newcommand{\C}{\mathbb{C}}
+
+  \renewcommand{\P}{\mathbb{P}}
+  \newcommand{\E}{\mathbb{E}}
+
+  \newcommand{\var}{\mathop{\mbox{Var}}}
+  \newcommand{\cov}{\mathop{\mbox{cov}}}
+  \newcommand{\median}{\mathop{\mbox{median}}}
+  %\newcommand{\det}{\mathop{\mbox{det}}}
+  \newcommand{\supp}{\mathop{\mbox{supp}}}
+  \newcommand{\sgn}{\mathop{\mbox{sgn}}}
+
+  \newcommand{\conv}{\mathop{\mbox{conv}}}
+  \newcommand{\deq}{\stackrel{\scriptscriptstyle{d}}{=}}
+  \newcommand{\dcv}{\stackrel{\scriptscriptstyle{d}}{\longrightarrow}}
+
+  \]
+  </div>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Mathematical insights and difficulties in spatial
+population genetics</h1>
+  <p class="author">Peter Ralph <br/> University of Oregon <br/> Dept of
+Data Science</p>
+  <p class="date">BartonFest ’25<br/> IST // 26 August 2025</p>
+</section>
+
+<section class="slide level2">
+
+<!--
+title-slide-attributes:
+    data-background-image: /path/to/title_image.png
+    data-background-size: contain
+-->
+<blockquote>
+<p>UO is located on the traditional indigenous homeland of the Kalapuya
+people. Kalapuya people were dispossessed of their indigenous homeland
+by the United States government and forcibly removed. Today, Kalapuya
+descendants are primarily citizens of the Confederated Tribes of Grand
+Ronde and the Confederated Tribes of Siletz Indians, and continue to
+make important contributions to their communities, to the UO, to Oregon,
+and to the world.</p>
+</blockquote>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column">
+<p><strong>Joint work with:</strong></p>
+<ul>
+<li>Alison Etheridge (Oxford)</li>
+<li>Tom Kurtz (Madison)</li>
+<li>Ian Letter (ex-Oxford)</li>
+<li>Terence Tsui (Warwick)</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="figs/coauthors.png" /></p>
+</div>
+</div>
+<p><em>slides:</em> <a
+href="https://petrelharp.github.io/barton-2025/barton-2025.slides.html">github.com/petrelharp/barton-2025</a></p>
+</section>
+<section>
+<section id="first-some-thanks" class="title-slide slide level1">
+<h1>First, some thanks</h1>
+
+</section>
+<section id="section-1" class="slide level2"
+data-background-image="figs/dynamics-of-hybrid-zones.png"
+data-background-position="center" data-background-size="100%">
+<h2 data-background-image="figs/dynamics-of-hybrid-zones.png"
+data-background-position="center" data-background-size="100%"></h2>
+</section>
+<section id="section-2" class="slide level2"
+data-background-image="figs/bde.png" data-background-position="center"
+data-background-size="100%">
+<h2 data-background-image="figs/bde.png"
+data-background-position="center" data-background-size="100%"></h2>
+</section>
+<section id="thanks-nick" class="slide level2">
+<h2>Thanks, Nick!!</h2>
+<!--
+Intro to the problem
+-->
+</section></section>
+<section>
+<section id="section-3" class="title-slide slide level1"
+data-background-image="figs/popgen-in-space-new.jpeg"
+data-background-position="center" data-background-size="100%">
+<h1 data-background-image="figs/popgen-in-space-new.jpeg"
+data-background-position="center" data-background-size="100%"></h1>
+<div class="caption bottomright">
+<p>‘art’ by G. Coop</p>
+</div>
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<p><img data-src="figs/ibd-by-some-pops.png" /></p>
+<div class="caption">
+<p>Desert tortoises, courtesy Brad Shaffer and Evan
+McCartney-Melstad</p>
+</div>
+</section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+<p><img data-src="figs/within-ivanpah-ibd.png" /></p>
+<div class="caption bottomright">
+<p>Desert tortoises, courtesy Brad Shaffer and Evan
+McCartney-Melstad</p>
+</div>
+<!--
+The population model
+-->
+</section></section>
+<section>
+<section id="spatial-populations" class="title-slide slide level1"
+data-background-image="sims/slim_density_anim.gif"
+data-background-position="center" data-background-size="100%">
+<h1 data-background-image="sims/slim_density_anim.gif"
+data-background-position="center" data-background-size="100%">Spatial
+populations</h1>
+
+</section>
+<section id="a-model" class="slide level2"
+data-background-image="figs/model.png" data-background-position="center"
+data-background-size="100%">
+<h2 data-background-image="figs/model.png"
+data-background-position="center" data-background-size="100%">A
+model</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Every individual:</p>
+<div>
+<ul>
+<li class="fragment">reproduces at rate <span class="red"><span
+class="math inline">\(\gamma\)</span></span></li>
+<li class="fragment">dies at rate <span class="blue"><span
+class="math inline">\(\mu\)</span></span></li>
+</ul>
+</div>
+<div class="fragment">
+<p>Offspring:</p>
+<div>
+<ul>
+<li class="fragment">disperse with variance <span class="yellow"><span
+class="math inline">\(\sigma^2\)</span></span></li>
+<li class="fragment">establish with probability <span class="red"><span
+class="math inline">\(r\)</span></span></li>
+</ul>
+</div>
+</div>
+<div class="fragment">
+<p>All this can depend on <em>location</em> and <em>local density</em>,
+measured with a kernel <span class="math inline">\(\rho\)</span>: <span
+class="math display">\[\text{(density at $x$)} = \sum_i \rho(x_i -
+x).\]</span></p>
+</div>
+</div><div class="column" style="width:50%;">
+
+</div>
+</div>
+</section>
+<section id="section-6" class="slide level2"
+data-background-image="figs/forwards-and-backwards.png"
+data-background-position="center" data-background-size="100%">
+<h2 data-background-image="figs/forwards-and-backwards.png"
+data-background-position="center" data-background-size="100%"></h2>
+<div class="red">
+<p>Everything here is thanks to Tom Kurtz,</p>
+<p>who showed us how to do it.</p>
+</div>
+<div class="r-stretch">
+
+</div>
+</section>
+<section class="slide level2">
+
+<p><video data-src="sims/expansion.pop.mp4" controls=""><a
+href="sims/expansion.pop.mp4">Video</a></video></p>
+</section>
+<section id="population-dynamics" class="slide level2"
+data-background-image="figs/model.png" data-background-position="right"
+data-background-size="75%">
+<h2 data-background-image="figs/model.png"
+data-background-position="right" data-background-size="75%">Population
+dynamics</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>The population density <span
+class="math inline">\(\varphi_t(x)\)</span> at time <span
+class="math inline">\(t\)</span> (<em>number</em> of individuals is
+<span class="math inline">\(N\varphi(x)\)</span>)</p>
+<div class="fragment">
+<p>changes because of <span class="yellow"><em>migration</em></span>
+<span class="math display">\[\begin{aligned}
+    \frac{d}{dt} \varphi_t(x)
+    &amp;=
+    r(x) \frac{1}{2\sigma^2} \Delta (\gamma \varphi_t)(x)
+\color{white}{+ \varphi_t(x) F(x)}
+\end{aligned}\]</span></p>
+</div>
+<div class="fragment">
+<p>and <em><span class="red">reproduction</span>/<span
+class="blue">death</span></em>: <span
+class="math display">\[\begin{aligned}
+    \frac{d}{dt} \varphi_t(x)
+    &amp;=
+    r(x) \frac{1}{2\sigma^2} \Delta (\gamma \varphi_t)(x) + \varphi_t(x)
+F(x) ,
+\end{aligned}\]</span> where <span class="math inline">\(F(x) = r(x)
+\gamma(x) - \mu(x)\)</span></p>
+</div>
+</div><div class="column" style="width:50%;">
+
+</div>
+</div>
+</section>
+<section id="forwards-lines-of-descent" class="slide level2"
+data-background-image="figs/lines_successful.png"
+data-background-position="right" data-background-size="100%">
+<h2 data-background-image="figs/lines_successful.png"
+data-background-position="right" data-background-size="100%">Forwards:
+lines of descent</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>A <em>potential</em> line of descent <span
+class="math inline">\(Y_t\)</span> diffuses at rate <span
+class="math inline">\(\sigma^2 \gamma(x)\)</span>: <span
+class="math display">\[dY_t = \sigma^2 \gamma(Y_t) dB_t .\]</span></p>
+<div class="fragment">
+<p>The density of <em>successful</em> lines of descent</p>
+</div>
+<div class="fragment">
+<p>from location <span class="math inline">\(x\)</span> at time <span
+class="math inline">\(s\)</span> to location <span
+class="math inline">\(y\)</span> at time <span
+class="math inline">\(t\)</span> is <span
+class="math inline">\(h_{s,t}(x,y)\)</span>, where <span
+class="math display">\[\int h_{s,t}(x,y) f(y) dy = \mathbb{E}_x[f(Y_t)
+e^{-\int_s^t b(Y_u) du}],\]</span></p>
+</div>
+<div class="fragment">
+<p>and <span class="math display">\[\begin{aligned}
+    b(x)
+    &amp;= \text{(mean net reproductive output at $x$)} \\
+    &amp;= \gamma(x) \int r(y) q(x,dy) - \mu(x) .
+\end{aligned}\]</span></p>
+</div>
+</div><div class="column" style="width:50%;">
+
+</div>
+</div>
+</section>
+<section id="consistency" class="slide level2"
+data-background-image="figs/lines_successful_all.png"
+data-background-position="right" data-background-size="100%">
+<h2 data-background-image="figs/lines_successful_all.png"
+data-background-position="right"
+data-background-size="100%">Consistency</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>The kernel <span class="math inline">\(h_{s,t}(x,y)\)</span> defined
+by <span class="math display">\[\int h_{s,t}(x,y) f(y) dy =
+\mathbb{E}_x[f(Y_t) e^{-\int_s^t b(Y_u) du}],\]</span></p>
+<p>is what evolves the density forwards in time: <span
+class="math display">\[\varphi_t(y) = \int \varphi_s(x) h_{s,t}(x,y) dx
+.\]</span></p>
+</div><div class="column" style="width:50%;">
+
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p><video data-src="sims/expansion.lineages.mp4" controls=""><a
+href="sims/expansion.lineages.mp4">Video</a></video></p>
+</section>
+<section id="backwards-lineages" class="slide level2"
+data-background-image="figs/lines_lineage.png"
+data-background-position="right" data-background-size="100%">
+<h2 data-background-image="figs/lines_lineage.png"
+data-background-position="right" data-background-size="100%">Backwards:
+lineages</h2>
+<div class="columns">
+<div class="column" style="width:65%;">
+<p>Suppose population has a stationary density <span
+class="math inline">\(\varphi(x)\)</span>. Then <span
+class="math display">\[ dL_t = r(L_t) \gamma(L_t) 2 \nabla
+\log(\varphi\gamma)(L_t) dt
++ \sqrt{r(L_t)\gamma(L_t)} dB_t\]</span></p>
+<div>
+<ul>
+<li class="fragment">Lineage speed determined by rate of production of
+mature offspring (<span class="red"><span
+class="math inline">\(r\gamma\)</span></span>, <span
+class="math inline">\(\approx\)</span> death),</li>
+<li class="fragment">and drawn to regions of high total fecundity (<span
+class="red"><span class="math inline">\(\varphi
+\gamma\)</span></span>).</li>
+<li class="fragment">Reversible with respect to <span
+class="math display">\[\color{red}{\pi(x) = \frac{\gamma(x,\varphi(x))
+w(x)^2 }{ r(x,w(x))}.} \]</span></li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+
+</div>
+</div>
+<!--
+Close relatives
+-->
+</section></section>
+<section>
+<section id="can-we-use-this" class="title-slide slide level1"
+data-background-image="sims/slim_density_screenshot_inverted.png"
+data-background-position="center" data-background-size="100%">
+<h1 data-background-image="sims/slim_density_screenshot_inverted.png"
+data-background-position="center" data-background-size="100%">Can we
+<em>use</em> this?</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<!--
+![](sims/bde/out_123.locs.png)
+-->
+</div><div class="column" style="width:50%;">
+<p><img data-src="sims/bde/out_123.ibd.png" /></p>
+</div>
+</div>
+</section>
+<section id="section-7" class="slide level2">
+<h2></h2>
+<p><img data-src="figs/barton-wilson-header.png" /></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="figs/barton-wilson-ARGs_hl.png" /></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="figs/barton-wilson-close-rels1_hl.png" /></p>
+</div>
+</div>
+</section>
+<section id="what-about-branching" class="slide level2"
+data-background-image="figs/lines_branching.png"
+data-background-position="right" data-background-size="100%">
+<h2 data-background-image="figs/lines_branching.png"
+data-background-position="right" data-background-size="100%">What about
+branching?</h2>
+<p>These models have <em>either</em></p>
+<ul>
+<li>deterministic population dynamics, or</li>
+<li>finite coalescence time distributions,</li>
+</ul>
+<p><strong>but not both.</strong></p>
+</section>
+<section id="what-about-branching-1" class="slide level2"
+data-background-image="figs/lines_successful_all_rare.png"
+data-background-position="right" data-background-size="100%">
+<h2 data-background-image="figs/lines_successful_all_rare.png"
+data-background-position="right" data-background-size="100%">What about
+branching?</h2>
+<p>These models have <em>either</em></p>
+<ul>
+<li>deterministic population dynamics, or</li>
+<li>finite coalescence time distributions,</li>
+</ul>
+<p><strong>but not both.</strong></p>
+</section>
+<section id="nonetheless" class="slide level2"
+data-background-image="figs/lines_branching_rare.png"
+data-background-position="right" data-background-size="100%">
+<h2 data-background-image="figs/lines_branching_rare.png"
+data-background-position="right"
+data-background-size="100%">Nonetheless…</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Successful lines of descent <em>branch</em> at rate <span
+class="math display">\[\begin{aligned}
+    \frac{1}{N} c(x)
+    &amp;= \frac{1}{N} \text{(total birth + death rate)} \\
+    &amp;= \frac{1}{N} \left( \gamma(x) \int r(y) q(x,dy) + \mu(x)
+\right)
+\end{aligned}\]</span></p>
+<div class="fragment">
+<p>and so the density of <em>close relatives</em> at locations <span
+class="math inline">\(x\)</span> and <span
+class="math inline">\(y\)</span> and time <span
+class="math inline">\(t\)</span> from time <span
+class="math inline">\(s\)</span> is <span
+class="math display">\[\begin{aligned}
+    \frac{1}{N} \int \varphi_s(z) c(z) h_{s,t}(z,x) h_{s,t}(z,y) dz .
+\end{aligned}\]</span></p>
+</div>
+</div><div class="column" style="width:50%;">
+
+</div>
+</div>
+</section>
+<section id="section-8" class="slide level2">
+<h2></h2>
+<p>Suppose that we’ve sampled <span class="math inline">\(K\)</span>
+individuals with intensity <span class="math inline">\(\nu(x)\)</span>
+and observed close relatives <span class="math inline">\(\{(x_i, y_i,
+t_i)\}_{i=1}^P\)</span>, with locations <span
+class="math inline">\((x_i, y_i)\)</span> and TMRCAs <span
+class="math inline">\(t_i\)</span> ago.</p>
+<p>How many such pairs do we <em>expect</em> to see?</p>
+<p>Well, the intensity of such pairs is <span
+class="math display">\[\begin{aligned}
+w(x,y,t) = \int \varphi_{-t_i}(z) c(z) h_{-t,0}(z,x) h_{-t,0}(z,y)
+\end{aligned}\]</span> and so the expected number with <span
+class="math inline">\(s \le t_i \le t\)</span> is <span
+class="math display">\[
+\frac{K^2}{N} \int_s^t w(x,y,u) \nu(x) \nu(y) dx dy du .
+\]</span></p>
+</section>
+<section id="does-it-work" class="slide level2">
+<h2>Does it work?</h2>
+<p><em>Simulation:</em> pairs with an ancestor within 20 generations iin
+100 samples from a spatial population with a total of <span
+class="math inline">\(10^4\)</span>:</p>
+<div class="r-stack">
+<div class="fragment coverup">
+<p><img data-src="figs/sim_pairs_1.png" /></p>
+</div>
+<div class="fragment coverup">
+<p><img data-src="figs/sim_pairs_1_2.png" /></p>
+</div>
+<div class="fragment coverup">
+<p><img data-src="figs/sim_pairs_1_2_3.png" /></p>
+</div>
+</div>
+</section></section>
+<section>
+<section id="wrap-up" class="title-slide slide level1">
+<h1>Wrap-up</h1>
+
+</section>
+<section id="spatial-population-genetics" class="slide level2">
+<h2>Spatial population genetics?</h2>
+<p>Takeaways:</p>
+<ul>
+<li>Forwards arguments keep model parameters visible!</li>
+<li>Coalescence and population-scale stochasticity really are two sides
+of the same coin.</li>
+</ul>
+<div class="fragment">
+<p>Moving forwards:</p>
+<div>
+<ul>
+<li class="fragment">A likelihood-based way to fit spatially
+heterogeneous population models?</li>
+<li class="fragment">More theory needed for patchy/stochastic
+populations!</li>
+<li class="fragment">S(L)imulation: see <a
+href="https://onlinelibrary.wiley.com/doi/full/10.1002/ece3.71098">Chevy
+et al, <em>A Guide to Individual-Based Simulations in Continuous
+Landscapes</em></a></li>
+</ul>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Thanks</strong> to Nick, Alison, and Tom</p>
+</div>
+</section>
+<section id="section-9" class="slide level2"
+data-background-image="figs/guillemots_thanks.png"
+data-background-position="center" data-background-size="50%">
+<h2 data-background-image="figs/guillemots_thanks.png"
+data-background-position="center" data-background-size="50%"></h2>
+<!--
+Wright-Malécot
+-->
+</section></section>
+<section>
+<section id="other-stuff" class="title-slide slide level1">
+<h1>Other stuff</h1>
+
+</section>
+<section id="wright-1943-malécot-1948" class="slide level2">
+<h2>Wright (1943), Malécot (1948)</h2>
+<p>If the population at time <span class="math inline">\(t\)</span> has
+density <span class="math inline">\(\varphi_t(x)\)</span>, so that the
+<em>number</em> near <span class="math inline">\(x\)</span> is <span
+class="math inline">\(N \varphi_t(x)\)</span>, and</p>
+<p><span class="math display">\[ I_t(x,y) = (\text{proportion identity
+between $x$ and $y$ at time $t$}) , \]</span></p>
+<p>then maybe <span class="math display">\[\begin{aligned}
+    I_t(x,y)
+    &amp;=
+        (1-\mu)^2 \sum_{x&#39;,y&#39;} \varphi_{t-1}(x&#39;)
+\varphi_{t-1}(y&#39;) I_{t-1}(x&#39;,y&#39;) p_1(x&#39;,x) p_1(y&#39;,y)
+    \\ &amp;\qquad
+        + (1-\mu)^2 \frac{1}{N} \sum_z \varphi_{t-1}(z) p_1(z,x)
+p_1(z,y) (1 - I_{t-1}(z,z)),
+\end{aligned}\]</span> where dispersal is <span class="math display">\[
+p_1(z,x) = \mathbb{P}\{\text{offspring from $z$ goes to $x$}\} .
+\]</span></p>
+<div class="caption">
+<p>better explanations: XXX</p>
+</div>
+</section>
+<section id="backwards" class="slide level2">
+<h2>Backwards</h2>
+<p><span class="math display">\[\begin{aligned}
+    I_t(x,y)
+    &amp;=
+        (1-\mu)^2 \sum_{x&#39;,y&#39;} \varphi_{t-1}(x&#39;)
+\varphi_{t-1}(y&#39;) I_{t-1}(x&#39;,y&#39;) p_1(x&#39;,x) p_1(y&#39;,y)
+    \\ &amp;\qquad
+        + (1-\mu)^2 \frac{1}{N} \sum_z \varphi_{t-1}(z) p_1(z,x)
+p_1(z,y) (1 - I_{t-1}(z,z))
+\end{aligned}\]</span></p>
+<p>Two individuals today are identical if</p>
+<ul>
+<li>their parents were distinct and identical</li>
+<li>or they are siblings,</li>
+<li>and neither got a new mutation.</li>
+</ul>
+</section>
+<section id="forwards" class="slide level2">
+<h2>Forwards</h2>
+<p><span class="math display">\[\begin{aligned}
+    I_{t+1}(x,y)
+    &amp;=(1-\mu)^2 \sum_{x&#39;,y&#39;} \varphi_{t}(x&#39;)
+\varphi_{t}(y&#39;) I_{t}(x&#39;,y&#39;) p_1(x&#39;,x) p_1(y&#39;,y)
+    \\ &amp;\qquad
+        + (1-\mu)^2 \frac{1}{N} \sum_z \varphi_{t}(z) p_1(z,x) p_1(z,y)
+(1 - I_{t}(z,z))
+\end{aligned}\]</span></p>
+<p>In the next generation, those who are identical</p>
+<ul>
+<li>have distinct and identical parents,</li>
+<li>or are siblings,</li>
+<li>except for when new mutation intevenes.</li>
+</ul>
+</section>
+<section id="a-solution" class="slide level2">
+<h2>A solution</h2>
+<p>At stationary, and in continuous time, we get <span
+class="math display">\[\begin{aligned}
+    \frac{\sigma^2}{2} (\Delta_x + \Delta_y) I_t(x,y) - 2 \mu I(x,y)
+    &amp;= - \frac{1}{N} \delta_0(x-y) (1 - I(x,y)) .
+\end{aligned}\]</span></p>
+<p>The solution is <span class="math display">\[\begin{aligned}
+    \frac{I(x,y)}{1 - I(XXX)}
+    &amp;= \frac{1}{N} \int_0^\infty \int e^{-2 \mu t} \varphi_t(z)
+p_t(z,x) p_t(z,y) dz dt .
+\end{aligned}\]</span></p>
+<p>Interpretation: sum over all coalescence times.</p>
+<p>Solution, in <span class="math inline">\(\mathbb{R}^2\)</span>: <span
+class="math display">\[ I(x,y) = K_0(xyz) . \]</span></p>
+<p>:tada:</p>
+<!--
+Difficulties
+-->
+</section>
+<section id="difficulties" class="slide level2">
+<h2>Difficulties</h2>
+<ol type="1">
+<li>What is <span class="math inline">\(N\)</span>?</li>
+<li>Um but <span class="math inline">\(K_0(0) = \infty\)</span>?</li>
+<li>Offspring don’t move independently, especially successful ones.</li>
+</ol>
+</section>
+<section id="whats-really-going-on" class="slide level2">
+<h2>What’s really going on?</h2>
+<p>Let <span class="math inline">\(\tau_{xy}\)</span> be the TMRCA of
+samples at <span class="math inline">\(x\)</span> and <span
+class="math inline">\(y\)</span>, so that <span
+class="math inline">\(I(x,y) = \mathbb{E}[e^{-2\mu t}
+\tau_{xy}]\)</span>,</p>
+<p>and <span class="math display">\[\begin{aligned}
+     n_s(z;x,y) &amp;= (\text{number of pairs at $x,y$} \\
+            &amp;\qquad \text{whose MRCA is at $z$, time $s$ ago}) .
+\end{aligned}\]</span></p>
+<p>Then <span class="math display">\[\begin{aligned}
+    \mathbb{P}\{ \tau_{xy} \le t \}
+    = \frac{ \int_0^t \int n_s(z;x,y) dz ds }
+           { \int_0^\infty \int n_s(z;x,y) dz ds } .
+\end{aligned}\]</span></p>
+<p>We want <span class="math display">\[ n_s(z;x,y) = C p_s(z,x)
+p_s(z,y) , \]</span> with <span class="math inline">\(C\)</span> a
+constant (local birth rate).</p>
+</section>
+<section id="the-problem" class="slide level2">
+<h2>The problem</h2>
+<p>We want</p>
+<ol type="1">
+<li><span class="math inline">\(n_s(z;x,y) = C p_s(z,x)
+p_s(z,y)\)</span>, with <span class="math inline">\(C\)</span> a
+constant, and</li>
+<li><span class="math inline">\(\int_0^\infty \int n_s(z;x,y) dz ds &lt;
+\infty\)</span>.</li>
+</ol>
+<div class="fragment">
+<p><a href="https://dx.doi.org/10.1214/24-EJP1075">EKLRT</a> showed that
+these are contradictory*.</p>
+<p>More generally: continuous spatial population models* can either
+have</p>
+<ol type="1">
+<li>finite coalescent time distributions, or</li>
+<li>be deterministic,</li>
+</ol>
+<p>but not both.</p>
+</div>
+<div class="fragment">
+<div class="caption">
+<p><em><span class="math inline">\({}^*\)</span>some terms and
+conditions may apply</em></p>
+</div>
+</div>
+</section>
+<section id="open-question" class="slide level2">
+<h2>Open question</h2>
+<p>There is nonetheless an expression for <span
+class="math inline">\(I\)</span> in <span
+class="math inline">\(d=1\)</span>; how do you get this out of the <a
+href="https://dx.doi.org/10.1214/24-EJP1075">EKLRT</a> model?</p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="./reveal.js/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="./reveal.js/plugin/notes/notes.js"></script>
+  <script src="./reveal.js/plugin/search/search.js"></script>
+  <script src="./reveal.js/plugin/zoom/zoom.js"></script>
+  <script src="./reveal.js/plugin/math/math.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: true,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

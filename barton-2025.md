@@ -168,7 +168,7 @@ $F(x) = r(x) \gamma(x) - \mu(x)$
 ::::::
 :::
 
-## Forwards: lines of descent {data-background-image="figs/model.png" data-background-position=right data-background-size=75%}
+## Forwards: lines of descent {data-background-image="figs/lines_successful.png" data-background-position=right data-background-size=100%}
 
 ::: {.columns}
 :::::: {.column width=50%}
@@ -202,7 +202,7 @@ $$\begin{aligned}
 ::::::
 :::
 
-## Consistency {data-background-image="figs/model.png" data-background-position=right data-background-size=75%}
+## Consistency {data-background-image="figs/lines_successful_all.png" data-background-position=right data-background-size=100%}
 
 ::: {.columns}
 :::::: {.column width=50%}
@@ -224,7 +224,7 @@ $$\varphi_t(y) = \int \varphi_s(x) h_{s,t}(x,y) dx .$$
 
 ![](sims/expansion.lineages.mp4)
 
-## Backwards: lineages {data-background-image="figs/model.png" data-background-position=right data-background-size=75%}
+## Backwards: lineages {data-background-image="figs/lines_lineage.png" data-background-position=right data-background-size=100%}
 
 ::: {.columns}
 :::::: {.column width=65%}
@@ -250,8 +250,65 @@ $$\color{red}{\pi(x) = \frac{\gamma(x,\varphi(x)) w(x)^2 }{ r(x,w(x))}.} $$
 ::::::
 :::
 
+<!--
+Close relatives
+-->
 
-## What about branching? {data-background-image="figs/model.png" data-background-position=right data-background-size=75%}
+# Can we *use* this? {data-background-image="sims/slim_density_screenshot_inverted.png" data-background-position=center data-background-size=100%}
+
+::: {.columns}
+:::::: {.column width=50%}
+
+<!--
+![](sims/bde/out_123.locs.png)
+-->
+
+::::::
+:::::: {.column width=50%}
+
+![](sims/bde/out_123.ibd.png)
+
+::::::
+:::
+
+## 
+
+![](figs/barton-wilson-header.png)
+
+::: {.columns}
+:::::: {.column width=50%}
+
+![](figs/barton-wilson-ARGs_hl.png)
+
+::::::
+:::::: {.column width=50%}
+
+
+![](figs/barton-wilson-close-rels1_hl.png)
+
+::::::
+:::
+
+
+## What about branching? {data-background-image="figs/lines_branching.png" data-background-position=right data-background-size=100%}
+
+These models have *either*
+
+- deterministic population dynamics, or
+- finite coalescence time distributions,
+
+**but not both.**
+
+## What about branching? {data-background-image="figs/lines_successful_all_rare.png" data-background-position=right data-background-size=100%}
+
+These models have *either*
+
+- deterministic population dynamics, or
+- finite coalescence time distributions,
+
+**but not both.**
+
+## Nonetheless... {data-background-image="figs/lines_branching_rare.png" data-background-position=right data-background-size=100%}
 
 ::: {.columns}
 :::::: {.column width=50%}
@@ -280,47 +337,7 @@ $$\begin{aligned}
 ::::::
 :::
 
-## Can we *use* this? {data-background-image="sims/slim_density_screenshot_inverted.png" data-background-position=center data-background-size=100%}
 
-::: {.columns}
-:::::: {.column width=50%}
-
-<!--
-![](sims/bde/out_123.locs.png)
--->
-
-::::::
-:::::: {.column width=50%}
-
-![](sims/bde/out_123.ibd.png)
-
-::::::
-:::
-
-
-<!--
-Close relatives
--->
-
-# Close relatives
-
-## 
-
-![](figs/barton-wilson-header.png)
-
-::: {.columns}
-:::::: {.column width=50%}
-
-![](figs/barton-wilson-ARGs_hl.png)
-
-::::::
-:::::: {.column width=50%}
-
-
-![](figs/barton-wilson-close-rels1_hl.png)
-
-::::::
-:::
 
 ##
 
@@ -366,6 +383,14 @@ with a total of $10^4$:
 # Wrap-up
 
 ## Spatial population genetics?
+
+Takeaways:
+
+- Forwards arguments keep model parameters visible!
+- Coalescence and population-scale stochasticity 
+    really are two sides of the same coin.
+
+. . .
 
 Moving forwards:
 
