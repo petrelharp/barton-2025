@@ -1,10 +1,10 @@
 ---
 title: "Mathematical insights and difficulties in spatial population genetics"
 author: "Peter Ralph <br/> University of Oregon <br/> Dept of Data Science"
-date: "BartonFest '25<br/> IST // 26 August 2025"
+date: "BartonFest '25<br/> IST // 26 August 2025<br/> *slides:* [github.com/petrelharp/barton-2025](https://petrelharp.github.io/barton-2025/barton-2025.slides.html)"
 ---
 
---------------------
+# First, some acknowledgements
 
 <!--
 title-slide-attributes:
@@ -17,32 +17,6 @@ Kalapuya people were dispossessed of their indigenous homeland by the United Sta
 Today, Kalapuya descendants are primarily citizens of the Confederated Tribes of Grand Ronde and the Confederated Tribes of Siletz Indians,
 and continue to make important contributions to their communities, to the UO, to Oregon, and to the world.
 
-
-## 
-
-::: {.columns}
-:::::: {.column}
-
-**Joint work with:**
-
-- Alison Etheridge (Oxford)
-- Tom Kurtz (Madison)
-- Ian Letter (ex-Oxford)
-- Terence Tsui (Warwick)
-
-:::
-:::::: {.column width=50%}
-
-![](figs/coauthors.png)
-
-:::
-::::::
-
-
-*slides:* [github.com/petrelharp/barton-2025](https://petrelharp.github.io/barton-2025/barton-2025.slides.html)
-
-
-# First, some thanks
 
 
 ## {data-background-image="figs/dynamics-of-hybrid-zones.png" data-background-position=center data-background-size=100%}
@@ -69,6 +43,7 @@ Intro to the problem
 Desert tortoises, courtesy Brad Shaffer and Evan McCartney-Melstad
 :::
 
+<!--
 ## 
 
 ![](figs/within-ivanpah-ibd.png)
@@ -76,6 +51,43 @@ Desert tortoises, courtesy Brad Shaffer and Evan McCartney-Melstad
 ::: {.caption .bottomright}
 Desert tortoises, courtesy Brad Shaffer and Evan McCartney-Melstad
 :::
+-->
+
+## 
+
+::: {.columns}
+:::::: {.column}
+
+Theory:
+[*Looking forwards and backwards: Dynamics and genealogies of locally regulated populations*](https://doi.org/10.1214/24-EJP1075)
+
+**Joint work with:**
+
+- Alison Etheridge (Oxford)
+- Tom Kurtz (Madison)
+- Ian Letter (ex-Oxford)
+- Terence Tsui (Warwick)
+
+:::
+:::::: {.column width=50%}
+
+![](figs/coauthors.png)
+
+:::
+::::::
+
+## {data-background-image="figs/forwards-and-backwards.png" data-background-position=center data-background-size=100%}
+
+::: red
+Everything here is thanks to Tom Kurtz,
+
+who showed us how to do it.
+:::
+
+::: r-stretch
+
+:::
+
 
 <!--
 The population model
@@ -111,22 +123,14 @@ measured with a kernel $\rho$:
 $$\text{(density at $x$)} = \sum_i \rho(x_i - x).$$
 :::
 
+::: fragment
+In [EKLRT](https://doi.org/10.1214/24-EJP1075): a *lookdown representation*.
+:::
+
 ::::::
 :::::: {.column width=50%}
 
 ::::::
-:::
-
-## {data-background-image="figs/forwards-and-backwards.png" data-background-position=center data-background-size=100%}
-
-::: red
-Everything here is thanks to Tom Kurtz,
-
-who showed us how to do it.
-:::
-
-::: r-stretch
-
 :::
 
 ---------
@@ -143,23 +147,40 @@ The population density $\varphi_t(x)$ at time $t$
 (*number* of individuals is $N\varphi(x)$)
 
 ::: fragment
+if $N$ is large
+:::
+
+:::: r-stack
+
+::: {.fragment .coverup}
 changes because of <span class="yellow">*migration*</span>
+<span class='hide'>and *<span class="red">reproduction</span>/<span class="blue">death</span>*:</span>
 $$\begin{aligned}
     \frac{d}{dt} \varphi_t(x)
     &=
-    r(x) \frac{1}{2\sigma^2} \Delta (\gamma \varphi_t)(x) \color{white}{+ \varphi_t(x) F(x)}
+    r(x) \frac{\sigma^2}{2} \Delta (\gamma \varphi_t)(x) \color{white}{+ \varphi_t(x) F(x)}
 \end{aligned}$$
 :::
 
-::: fragment
+::: {.fragment .coverup}
+changes because of <span class="yellow">*migration*</span>
 and *<span class="red">reproduction</span>/<span class="blue">death</span>*:
 $$\begin{aligned}
     \frac{d}{dt} \varphi_t(x)
     &=
-    r(x) \frac{1}{2\sigma^2} \Delta (\gamma \varphi_t)(x) + \varphi_t(x) F(x) ,
+    r(x) \frac{\sigma^2}{2} \Delta (\gamma \varphi_t)(x) + \varphi_t(x) F(x) ,
 \end{aligned}$$
+:::
+
+::::
+
+::: fragment
 where
-$F(x) = r(x) \gamma(x) - \mu(x)$
+$$\begin{aligned}
+    F(x)
+    &= \text{(net reproductive output at $x$)} \\
+    &= \gamma(x) r(x) - \mu(x) .
+\end{aligned}$$
 :::
 
 ::::::
@@ -183,15 +204,12 @@ The density of *successful* lines of descent
 ::: fragment
 from location $x$ at time $s$ to location $y$ at time $t$
 is $h_{s,t}(x,y)$, where
-$$\int h_{s,t}(x,y) f(y) dy = \mathbb{E}_x[f(Y_t) e^{\int_s^t b(Y_u) du}],$$
-:::
-
-::: fragment
+$$\int h_{s,t}(x,y) f(y) dy = \mathbb{E}_x[f(Y_t) e^{\int_s^t F(Y_u) du}],$$
 and
 $$\begin{aligned}
-    b(x)
-    &= \text{(mean net reproductive output at $x$)} \\
-    &= \gamma(x) \int r(y) q(x,dy) - \mu(x) .
+    F(x)
+    &= \text{(net reproductive output at $x$)} \\
+    &= \gamma(x) r(x) - \mu(x) .
 \end{aligned}$$
 :::
 
@@ -319,7 +337,7 @@ at rate
 $$\begin{aligned}
     \frac{1}{N} c(x) 
     &= \frac{1}{N} \text{(total birth + death rate)} \\
-    &= \frac{1}{N} \left( \gamma(x) \int r(y) q(x,dy) + \mu(x) \right)
+    &= \frac{1}{N} \left( \gamma(x) r(x) + \mu(x) \right)
 \end{aligned}$$
 
 ::: fragment
@@ -341,26 +359,37 @@ $$\begin{aligned}
 
 ##
 
-Suppose that we've sampled $K$ individuals
+Suppose that we've sampled $K$ individuals at time $T$
 with intensity $\nu(x)$
 and observed close relatives $\{(x_i, y_i, t_i)\}_{i=1}^P$,
-with locations $(x_i, y_i)$ and TMRCAs $t_i$ ago.
+with locations $(x_i, y_i)$ and TMRCAs $t_i$.
+
+. . .
 
 How many such pairs do we *expect* to see?
 
+. . .
+
 Well, the intensity of such pairs is
 $$\begin{aligned}
-w(x,y,t) = \int \varphi_{-t_i}(z) c(z) h_{-t,0}(z,x) h_{-t,0}(z,y)
+w(x,y,t) = \int \varphi_{t}(z) c(z) h_{t,T}(z,x) h_{t,T}(z,y)
 \end{aligned}$$
-and so the expected number with $s \le t_i \le t$ is
+
+. . .
+
+and so the expected number with $S \le t_i \le T$ is
 $$
-\frac{K^2}{N} \int_s^t w(x,y,u) \nu(x) \nu(y) dx dy du .
+\frac{K^2}{N} \int_S^T w(x,y,t) \nu(x) \nu(y) dx dy dt .
 $$
+
+. . .
+
+*Rare* $\longrightarrow$ Poisson?
 
 ## Does it work?
 
 *Simulation:* pairs with an ancestor within 20 generations
-iin 100 samples from a spatial population
+in 100 samples from a spatial population
 with a total of $10^4$:
 
 ::::: r-stack
@@ -380,9 +409,7 @@ with a total of $10^4$:
 :::::
 
 
-# Wrap-up
-
-## Spatial population genetics?
+# Spatial population genetics?
 
 Takeaways:
 
@@ -397,13 +424,14 @@ Moving forwards:
 ::: incremental
 - A likelihood-based way to fit spatially
     heterogeneous population models?
-- More theory needed for patchy/stochastic populations!
+- We do *not* go as far as B&W or BDE!
+    More theory needed for patchy/stochastic populations.
 - S(L)imulation: see [Chevy et al, *A Guide to Individual-Based Simulations in Continuous Landscapes*](https://onlinelibrary.wiley.com/doi/full/10.1002/ece3.71098)
 :::
 
 . . .
 
-**Thanks** to Nick, Alison, and Tom
+**All the thanks** to Nick, Alison, and Tom!
 
 ## {data-background-image="figs/guillemots_thanks.png" data-background-position=center data-background-size=50%}
 

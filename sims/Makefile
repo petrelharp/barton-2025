@@ -24,3 +24,6 @@ bde/out_%.trees : bde.slim
 
 bde_hd/out_%.trees : bde_high_density.slim
 	slim -s $* -d 'OUTDIR="bde_hd"' $<
+
+%.rev.mp4 : %.mp4
+	ffmpeg -i $< -vf reverse $@

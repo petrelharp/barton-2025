@@ -158,11 +158,15 @@
 population genetics</h1>
   <p class="author">Peter Ralph <br/> University of Oregon <br/> Dept of
 Data Science</p>
-  <p class="date">BartonFest ’25<br/> IST // 26 August 2025</p>
+  <p class="date">BartonFest ’25<br/> IST // 26 August 2025<br/>
+<em>slides:</em> <a
+href="https://petrelharp.github.io/barton-2025/barton-2025.slides.html">github.com/petrelharp/barton-2025</a></p>
 </section>
 
-<section class="slide level2">
-
+<section>
+<section id="first-some-acknowledgements"
+class="title-slide slide level1">
+<h1>First, some acknowledgements</h1>
 <!--
 title-slide-attributes:
     data-background-image: /path/to/title_image.png
@@ -178,36 +182,13 @@ make important contributions to their communities, to the UO, to Oregon,
 and to the world.</p>
 </blockquote>
 </section>
-<section id="section" class="slide level2">
-<h2></h2>
-<div class="columns">
-<div class="column">
-<p><strong>Joint work with:</strong></p>
-<ul>
-<li>Alison Etheridge (Oxford)</li>
-<li>Tom Kurtz (Madison)</li>
-<li>Ian Letter (ex-Oxford)</li>
-<li>Terence Tsui (Warwick)</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p><img data-src="figs/coauthors.png" /></p>
-</div>
-</div>
-<p><em>slides:</em> <a
-href="https://petrelharp.github.io/barton-2025/barton-2025.slides.html">github.com/petrelharp/barton-2025</a></p>
-</section>
-<section>
-<section id="first-some-thanks" class="title-slide slide level1">
-<h1>First, some thanks</h1>
-
-</section>
-<section id="section-1" class="slide level2"
+<section id="section" class="slide level2"
 data-background-image="figs/dynamics-of-hybrid-zones.png"
 data-background-position="center" data-background-size="100%">
 <h2 data-background-image="figs/dynamics-of-hybrid-zones.png"
 data-background-position="center" data-background-size="100%"></h2>
 </section>
-<section id="section-2" class="slide level2"
+<section id="section-1" class="slide level2"
 data-background-image="figs/bde.png" data-background-position="center"
 data-background-size="100%">
 <h2 data-background-image="figs/bde.png"
@@ -220,7 +201,7 @@ Intro to the problem
 -->
 </section></section>
 <section>
-<section id="section-3" class="title-slide slide level1"
+<section id="section-2" class="title-slide slide level1"
 data-background-image="figs/popgen-in-space-new.jpeg"
 data-background-position="center" data-background-size="100%">
 <h1 data-background-image="figs/popgen-in-space-new.jpeg"
@@ -229,20 +210,53 @@ data-background-position="center" data-background-size="100%"></h1>
 <p>‘art’ by G. Coop</p>
 </div>
 </section>
-<section id="section-4" class="slide level2">
+<section id="section-3" class="slide level2">
 <h2></h2>
 <p><img data-src="figs/ibd-by-some-pops.png" /></p>
 <div class="caption">
 <p>Desert tortoises, courtesy Brad Shaffer and Evan
 McCartney-Melstad</p>
 </div>
+<!--
+## 
+
+![](figs/within-ivanpah-ibd.png)
+
+::: {.caption .bottomright}
+Desert tortoises, courtesy Brad Shaffer and Evan McCartney-Melstad
+:::
+-->
 </section>
-<section id="section-5" class="slide level2">
+<section id="section-4" class="slide level2">
 <h2></h2>
-<p><img data-src="figs/within-ivanpah-ibd.png" /></p>
-<div class="caption bottomright">
-<p>Desert tortoises, courtesy Brad Shaffer and Evan
-McCartney-Melstad</p>
+<div class="columns">
+<div class="column">
+<p>Theory: <a href="https://doi.org/10.1214/24-EJP1075"><em>Looking
+forwards and backwards: Dynamics and genealogies of locally regulated
+populations</em></a></p>
+<p><strong>Joint work with:</strong></p>
+<ul>
+<li>Alison Etheridge (Oxford)</li>
+<li>Tom Kurtz (Madison)</li>
+<li>Ian Letter (ex-Oxford)</li>
+<li>Terence Tsui (Warwick)</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="figs/coauthors.png" /></p>
+</div>
+</div>
+</section>
+<section id="section-5" class="slide level2"
+data-background-image="figs/forwards-and-backwards.png"
+data-background-position="center" data-background-size="100%">
+<h2 data-background-image="figs/forwards-and-backwards.png"
+data-background-position="center" data-background-size="100%"></h2>
+<div class="red">
+<p>Everything here is thanks to Tom Kurtz,</p>
+<p>who showed us how to do it.</p>
+</div>
+<div class="r-stretch">
+
 </div>
 <!--
 The population model
@@ -291,22 +305,13 @@ measured with a kernel <span class="math inline">\(\rho\)</span>: <span
 class="math display">\[\text{(density at $x$)} = \sum_i \rho(x_i -
 x).\]</span></p>
 </div>
+<div class="fragment">
+<p>In <a href="https://doi.org/10.1214/24-EJP1075">EKLRT</a>: a
+<em>lookdown representation</em>.</p>
+</div>
 </div><div class="column" style="width:50%;">
 
 </div>
-</div>
-</section>
-<section id="section-6" class="slide level2"
-data-background-image="figs/forwards-and-backwards.png"
-data-background-position="center" data-background-size="100%">
-<h2 data-background-image="figs/forwards-and-backwards.png"
-data-background-position="center" data-background-size="100%"></h2>
-<div class="red">
-<p>Everything here is thanks to Tom Kurtz,</p>
-<p>who showed us how to do it.</p>
-</div>
-<div class="r-stretch">
-
 </div>
 </section>
 <section class="slide level2">
@@ -327,24 +332,38 @@ class="math inline">\(\varphi_t(x)\)</span> at time <span
 class="math inline">\(t\)</span> (<em>number</em> of individuals is
 <span class="math inline">\(N\varphi(x)\)</span>)</p>
 <div class="fragment">
+<p>if <span class="math inline">\(N\)</span> is large</p>
+</div>
+<div class="r-stack">
+<div class="fragment coverup">
 <p>changes because of <span class="yellow"><em>migration</em></span>
-<span class="math display">\[\begin{aligned}
+<span class="hide">and <em><span class="red">reproduction</span>/<span
+class="blue">death</span></em>:</span> <span
+class="math display">\[\begin{aligned}
     \frac{d}{dt} \varphi_t(x)
     &amp;=
-    r(x) \frac{1}{2\sigma^2} \Delta (\gamma \varphi_t)(x)
-\color{white}{+ \varphi_t(x) F(x)}
+    r(x) \frac{\sigma^2}{2} \Delta (\gamma \varphi_t)(x) \color{white}{+
+\varphi_t(x) F(x)}
 \end{aligned}\]</span></p>
 </div>
-<div class="fragment">
-<p>and <em><span class="red">reproduction</span>/<span
+<div class="fragment coverup">
+<p>changes because of <span class="yellow"><em>migration</em></span> and
+<em><span class="red">reproduction</span>/<span
 class="blue">death</span></em>: <span
 class="math display">\[\begin{aligned}
     \frac{d}{dt} \varphi_t(x)
     &amp;=
-    r(x) \frac{1}{2\sigma^2} \Delta (\gamma \varphi_t)(x) + \varphi_t(x)
+    r(x) \frac{\sigma^2}{2} \Delta (\gamma \varphi_t)(x) + \varphi_t(x)
 F(x) ,
-\end{aligned}\]</span> where <span class="math inline">\(F(x) = r(x)
-\gamma(x) - \mu(x)\)</span></p>
+\end{aligned}\]</span></p>
+</div>
+</div>
+<div class="fragment">
+<p>where <span class="math display">\[\begin{aligned}
+    F(x)
+    &amp;= \text{(net reproductive output at $x$)} \\
+    &amp;= \gamma(x) r(x) - \mu(x) .
+\end{aligned}\]</span></p>
 </div>
 </div><div class="column" style="width:50%;">
 
@@ -373,13 +392,11 @@ class="math inline">\(y\)</span> at time <span
 class="math inline">\(t\)</span> is <span
 class="math inline">\(h_{s,t}(x,y)\)</span>, where <span
 class="math display">\[\int h_{s,t}(x,y) f(y) dy = \mathbb{E}_x[f(Y_t)
-e^{\int_s^t b(Y_u) du}],\]</span></p>
-</div>
-<div class="fragment">
-<p>and <span class="math display">\[\begin{aligned}
-    b(x)
-    &amp;= \text{(mean net reproductive output at $x$)} \\
-    &amp;= \gamma(x) \int r(y) q(x,dy) - \mu(x) .
+e^{\int_s^t F(Y_u) du}],\]</span> and <span
+class="math display">\[\begin{aligned}
+    F(x)
+    &amp;= \text{(net reproductive output at $x$)} \\
+    &amp;= \gamma(x) r(x) - \mu(x) .
 \end{aligned}\]</span></p>
 </div>
 </div><div class="column" style="width:50%;">
@@ -435,7 +452,7 @@ class="red"><span class="math inline">\(\varphi
 \gamma\)</span></span>).</li>
 <li class="fragment">Reversible with respect to <span
 class="math display">\[\color{red}{\pi(x) = \frac{\gamma(x,\varphi(x))
-w(x)^2 }{ r(x,w(x))}.} \]</span></li>
+\varphi(x)^2 }{ r(x,\varphi(x))}.} \]</span></li>
 </ul>
 </div>
 </div><div class="column" style="width:50%;">
@@ -463,7 +480,7 @@ data-background-position="center" data-background-size="100%">Can we
 </div>
 </div>
 </section>
-<section id="section-7" class="slide level2">
+<section id="section-6" class="slide level2">
 <h2></h2>
 <p><img data-src="figs/barton-wilson-header.png" /></p>
 <div class="columns">
@@ -512,8 +529,7 @@ data-background-size="100%">Nonetheless…</h2>
 class="math display">\[\begin{aligned}
     \frac{1}{N} c(x)
     &amp;= \frac{1}{N} \text{(total birth + death rate)} \\
-    &amp;= \frac{1}{N} \left( \gamma(x) \int r(y) q(x,dy) + \mu(x)
-\right)
+    &amp;= \frac{1}{N} \left( \gamma(x) r(x) + \mu(x) \right)
 \end{aligned}\]</span></p>
 <div class="fragment">
 <p>and so the density of <em>close relatives</em> at locations <span
@@ -530,27 +546,38 @@ class="math display">\[\begin{aligned}
 </div>
 </div>
 </section>
-<section id="section-8" class="slide level2">
+<section id="section-7" class="slide level2">
 <h2></h2>
 <p>Suppose that we’ve sampled <span class="math inline">\(K\)</span>
-individuals with intensity <span class="math inline">\(\nu(x)\)</span>
-and observed close relatives <span class="math inline">\(\{(x_i, y_i,
+individuals at time <span class="math inline">\(T\)</span> with
+intensity <span class="math inline">\(\nu(x)\)</span> and observed close
+relatives <span class="math inline">\(\{(x_i, y_i,
 t_i)\}_{i=1}^P\)</span>, with locations <span
 class="math inline">\((x_i, y_i)\)</span> and TMRCAs <span
-class="math inline">\(t_i\)</span> ago.</p>
+class="math inline">\(t_i\)</span>.</p>
+<div class="fragment">
 <p>How many such pairs do we <em>expect</em> to see?</p>
+</div>
+<div class="fragment">
 <p>Well, the intensity of such pairs is <span
 class="math display">\[\begin{aligned}
-w(x,y,t) = \int \varphi_{-t_i}(z) c(z) h_{-t,0}(z,x) h_{-t,0}(z,y)
-\end{aligned}\]</span> and so the expected number with <span
-class="math inline">\(s \le t_i \le t\)</span> is <span
-class="math display">\[
-\frac{K^2}{N} \int_s^t w(x,y,u) \nu(x) \nu(y) dx dy du .
+w(x,y,t) = \int \varphi_{t}(z) c(z) h_{t,T}(z,x) h_{t,T}(z,y)
+\end{aligned}\]</span></p>
+</div>
+<div class="fragment">
+<p>and so the expected number with <span class="math inline">\(S \le t_i
+\le T\)</span> is <span class="math display">\[
+\frac{K^2}{N} \int_S^T w(x,y,t) \nu(x) \nu(y) dx dy dt .
 \]</span></p>
+</div>
+<div class="fragment">
+<p><em>Rare</em> <span class="math inline">\(\longrightarrow\)</span>
+Poisson?</p>
+</div>
 </section>
 <section id="does-it-work" class="slide level2">
 <h2>Does it work?</h2>
-<p><em>Simulation:</em> pairs with an ancestor within 20 generations iin
+<p><em>Simulation:</em> pairs with an ancestor within 20 generations in
 100 samples from a spatial population with a total of <span
 class="math inline">\(10^4\)</span>:</p>
 <div class="r-stack">
@@ -566,12 +593,9 @@ class="math inline">\(10^4\)</span>:</p>
 </div>
 </section></section>
 <section>
-<section id="wrap-up" class="title-slide slide level1">
-<h1>Wrap-up</h1>
-
-</section>
-<section id="spatial-population-genetics" class="slide level2">
-<h2>Spatial population genetics?</h2>
+<section id="spatial-population-genetics"
+class="title-slide slide level1">
+<h1>Spatial population genetics?</h1>
 <p>Takeaways:</p>
 <ul>
 <li>Forwards arguments keep model parameters visible!</li>
@@ -584,8 +608,8 @@ of the same coin.</li>
 <ul>
 <li class="fragment">A likelihood-based way to fit spatially
 heterogeneous population models?</li>
-<li class="fragment">More theory needed for patchy/stochastic
-populations!</li>
+<li class="fragment">We do <em>not</em> go as far as B&amp;W or BDE!
+More theory needed for patchy/stochastic populations.</li>
 <li class="fragment">S(L)imulation: see <a
 href="https://onlinelibrary.wiley.com/doi/full/10.1002/ece3.71098">Chevy
 et al, <em>A Guide to Individual-Based Simulations in Continuous
@@ -594,10 +618,10 @@ Landscapes</em></a></li>
 </div>
 </div>
 <div class="fragment">
-<p><strong>Thanks</strong> to Nick, Alison, and Tom</p>
+<p><strong>All the thanks</strong> to Nick, Alison, and Tom!</p>
 </div>
 </section>
-<section id="section-9" class="slide level2"
+<section id="section-8" class="slide level2"
 data-background-image="figs/guillemots_thanks.png"
 data-background-position="center" data-background-size="50%">
 <h2 data-background-image="figs/guillemots_thanks.png"

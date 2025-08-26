@@ -9,6 +9,7 @@ $(TARGET) : setup
 
 setup :
 	$(MAKE) -C figs
+	$(MAKE) -C sims
 
 publish : $(TARGET)
 	# do this after giving the talk
