@@ -527,9 +527,8 @@ data-background-size="100%">Nonetheless…</h2>
 <div class="column" style="width:50%;">
 <p>Successful lines of descent <em>branch</em> at rate <span
 class="math display">\[\begin{aligned}
-    \frac{1}{N} c(x)
-    &amp;= \frac{1}{N} \text{(total birth + death rate)} \\
-    &amp;= \frac{1}{N} \left( \gamma(x) r(x) + \mu(x) \right)
+    \frac{1}{N} \gamma(x) r(x)
+    &amp;= \frac{1}{N} \text{(successful birth rate)}
 \end{aligned}\]</span></p>
 <div class="fragment">
 <p>and so the density of <em>close relatives</em> at locations <span
@@ -538,7 +537,8 @@ class="math inline">\(y\)</span> and time <span
 class="math inline">\(t\)</span> from time <span
 class="math inline">\(s\)</span> is <span
 class="math display">\[\begin{aligned}
-    \frac{1}{N} \int \varphi_s(z) c(z) h_{s,t}(z,x) h_{s,t}(z,y) dz .
+    \frac{1}{N} \int \varphi_s(z) \gamma(z) r(z) h_{s,t}(z,x)
+h_{s,t}(z,y) dz .
 \end{aligned}\]</span></p>
 </div>
 </div><div class="column" style="width:50%;">
@@ -561,7 +561,7 @@ class="math inline">\(t_i\)</span>.</p>
 <div class="fragment">
 <p>Well, the intensity of such pairs is <span
 class="math display">\[\begin{aligned}
-w(x,y,t) = \int \varphi_{t}(z) c(z) h_{t,T}(z,x) h_{t,T}(z,y)
+w(x,y,t) = \int \varphi_{t}(z) \gamma(z) r(z) h_{t,T}(z,x) h_{t,T}(z,y)
 \end{aligned}\]</span></p>
 </div>
 <div class="fragment">

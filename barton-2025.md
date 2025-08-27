@@ -333,11 +333,10 @@ These models have *either*
 
 
 Successful lines of descent *branch*
-at rate
+at rate 
 $$\begin{aligned}
-    \frac{1}{N} c(x) 
-    &= \frac{1}{N} \text{(total birth + death rate)} \\
-    &= \frac{1}{N} \left( \gamma(x) r(x) + \mu(x) \right)
+    \frac{1}{N} \gamma(x) r(x)
+    &= \frac{1}{N} \text{(successful birth rate)} 
 \end{aligned}$$
 
 ::: fragment
@@ -345,7 +344,7 @@ and so the density of *close relatives*
 at locations $x$ and $y$ and time $t$
 from time $s$ is
 $$\begin{aligned}
-    \frac{1}{N} \int \varphi_s(z) c(z) h_{s,t}(z,x) h_{s,t}(z,y) dz .
+    \frac{1}{N} \int \varphi_s(z) \gamma(z) r(z) h_{s,t}(z,x) h_{s,t}(z,y) dz .
 \end{aligned}$$
 :::
 
@@ -372,7 +371,7 @@ How many such pairs do we *expect* to see?
 
 Well, the intensity of such pairs is
 $$\begin{aligned}
-w(x,y,t) = \int \varphi_{t}(z) c(z) h_{t,T}(z,x) h_{t,T}(z,y)
+w(x,y,t) = \int \varphi_{t}(z) \gamma(z) r(z) h_{t,T}(z,x) h_{t,T}(z,y)
 \end{aligned}$$
 
 . . .
